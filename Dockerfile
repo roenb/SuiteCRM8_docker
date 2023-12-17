@@ -38,9 +38,9 @@ RUN npm install --global yarn
 # RUN sed -i 's|/var/www/html|/var/www/html/SuiteCRM|g' /etc/apache2/sites-available/000-default.conf
 
 # Change ownership and permissions of the SuiteCRM directory
-RUN chown -R www-data:www-data /var/www/html/SuiteCRM
-RUN find /var/www/html/SuiteCRM -type d -exec chmod 755 {} \;
-RUN find /var/www/html/SuiteCRM -type f -exec chmod 644 {} \;
+RUN chown -R www-data:www-data /var/www/html
+RUN find /var/www/html -type d -exec chmod 755 {} \;
+RUN find /var/www/html -type f -exec chmod 644 {} \;
 
 EXPOSE 80
 
