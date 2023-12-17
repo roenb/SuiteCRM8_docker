@@ -35,7 +35,7 @@ RUN npm install -g @angular/cli
 RUN npm install --global yarn
 
 # Change the document root of Apache to /var/www/html/SuiteCRM
-RUN sed -i 's|/var/www/html|/var/www/html/SuiteCRM|g' /etc/apache2/sites-available/000-default.conf
+# RUN sed -i 's|/var/www/html|/var/www/html/SuiteCRM|g' /etc/apache2/sites-available/000-default.conf
 
 # Change ownership and permissions of the SuiteCRM directory
 RUN chown -R www-data:www-data /var/www/html/SuiteCRM
