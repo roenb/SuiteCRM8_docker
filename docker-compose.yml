@@ -23,7 +23,7 @@ services:
       - environment/sample.env
       #- environment/.env
     ports:
-      - "80:80"
+      - "8082:80"
     labels:
       - me.titmus.authors="jon@titmus.me"
 
