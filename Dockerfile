@@ -21,6 +21,7 @@ RUN apt-get install -y php7.4-mysql
 RUN apt-get install -y php7.4-curl php7.4-intl php7.4-zip php7.4-imap php7.4-gd
 
 RUN a2enmod rewrite
+RUN a2enmod php7.4
 RUN a2enconf php7.4-fpm
 
 RUN apt install -y php7.4-xml php7.4-mbstring
@@ -33,12 +34,14 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN npm install -g @angular/cli
 RUN npm install --global yarn
 
-# Copy the helper folder to a secure location
-COPY ./helper /opt/helper
-# Set execution permissions for scripts in the helper folder
-RUN chmod -R +x /opt/helper
+# Change the document root of Apache to /var/www/html/SuiteCRM
+RUN sed -i 's|/var/www/html|/var/www/html/SuiteCRM|g' /etc/apache2/sites-available/000-default.conf
 
-
-CMD ["apachectl", "-D", "FOREGROUND"]
+# Change ownership and permissions of the SuiteCRM directory
+RUN chown -R www-data:www-data /var/www/html/SuiteCRM
+RUN find /var/www/html/SuiteCRM -type d -exec chmod 755 {} \;
+RUN find /var/www/html/SuiteCRM -type f -exec chmod 644 {} \;
 
 EXPOSE 80
+
+CMD ["apachectl", "-D", "FOREGROUND"]
