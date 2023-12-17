@@ -33,6 +33,12 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN npm install -g @angular/cli
 RUN npm install --global yarn
 
+# Copy the helper folder to a secure location
+COPY ./helper /opt/helper
+# Set execution permissions for scripts in the helper folder
+RUN chmod -R +x /opt/helper
+
+
 CMD ["apachectl", "-D", "FOREGROUND"]
 
 EXPOSE 80
