@@ -42,6 +42,16 @@ RUN chown -R www-data:www-data /var/www/html
 RUN find /var/www/html -type d -exec chmod 755 {} \;
 RUN find /var/www/html -type f -exec chmod 644 {} \;
 
+# Disable the default site
+RUN a2dissite 000-default.conf
+
+# Add custom site configuration
+COPY ./docker/config/apache/sites.conf /etc/apache2/sites-available/suitecrm.conf
+RUN a2ensite suitecrm.conf
+
+# Optionally remove the default config if it's not needed
+RUN rm /etc/apache2/sites-available/000-default.conf
+
 EXPOSE 80
 
 CMD ["apachectl", "-D", "FOREGROUND"]
