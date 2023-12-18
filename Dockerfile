@@ -34,6 +34,9 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN npm install -g @angular/cli
 RUN npm install --global yarn
 
+
+RUN apt-get install -y mysql-client
+
 # Change the document root of Apache to /var/www/html/SuiteCRM
 # RUN sed -i 's|/var/www/html|/var/www/html/SuiteCRM|g' /etc/apache2/sites-available/000-default.conf
 
