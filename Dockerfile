@@ -37,10 +37,13 @@ RUN npm install --global yarn
 # Change the document root of Apache to /var/www/html/SuiteCRM
 # RUN sed -i 's|/var/www/html|/var/www/html/SuiteCRM|g' /etc/apache2/sites-available/000-default.conf
 
-# Change ownership and permissions of the SuiteCRM directory
-RUN chown -R www-data:www-data /var/www/html
-RUN find /var/www/html -type d -exec chmod 755 {} \;
-RUN find /var/www/html -type f -exec chmod 644 {} \;
+# Set ownership for the SuiteCRM directory
+RUN chown -R www-data:www-data /var/www/html/SuiteCRM
+
+# Set permissions for directories and files within SuiteCRM
+RUN find /var/www/html/SuiteCRM -type d -exec chmod 775 {} \;
+RUN find /var/www/html/SuiteCRM -type f -exec chmod 664 {} \;
+
 
 # Disable the default site
 RUN a2dissite 000-default.conf
