@@ -43,6 +43,11 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 RUN apt-get install -y php7.4-ldap
 
 RUN apt-get install -y mysql-client
+# Install OpenSSL
+RUN apt-get install -y openssl
+
+# Enable SSL module in Apache
+RUN a2enmod ssl
 
 # Change the document root of Apache to /var/www/html/SuiteCRM
 # RUN sed -i 's|/var/www/html|/var/www/html/SuiteCRM|g' /etc/apache2/sites-available/000-default.conf
