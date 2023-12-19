@@ -8,7 +8,7 @@ services:
     volumes:
       #SuiteCRM Application Folder
       - ./www:/var/www/html
-      #SuiteCRM Log Folder
+      # #SuiteCRM Log Folder
       - ./logs/SuiteCRM:/var/www/html/SuiteCRM/logs
       #PHP config
       - ./docker/config/php/php.ini:/etc/php/7.4/cli/php.ini 

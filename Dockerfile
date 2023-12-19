@@ -34,6 +34,13 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN npm install -g @angular/cli
 RUN npm install --global yarn
 
+# Install Composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+    && php -r "unlink('composer-setup.php');"
+
+# Install PHP LDAP extension
+RUN apt-get install -y php7.4-ldap
 
 RUN apt-get install -y mysql-client
 
@@ -58,6 +65,12 @@ RUN a2ensite suitecrm.conf
 
 # Optionally remove the default config if it's not needed
 RUN rm /etc/apache2/sites-available/000-default.conf
+
+# Add an entrypoint script
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
 
 EXPOSE 80
 
