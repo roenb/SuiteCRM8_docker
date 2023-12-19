@@ -67,7 +67,7 @@ RUN a2ensite suitecrm.conf
 RUN rm /etc/apache2/sites-available/000-default.conf
 
 # Add an entrypoint script
-COPY entrypoint.sh /usr/bin/entrypoint.sh
+COPY ./entrypoint.sh /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["/usr/bin/entrypoint.sh"]
 
